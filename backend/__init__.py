@@ -1,6 +1,6 @@
 from flask import Flask
 
-from .extensions import db, migrate
+from .extensions import db, migrate, jwt
 from .routes.auth import auth
 from .routes.api import api
 
@@ -13,6 +13,7 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
+    jwt.init_app(app)
 
     app.register_blueprint(auth)
     app.register_blueprint(api)
