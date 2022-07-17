@@ -1,7 +1,2 @@
-POST http://127.0.0.1:5000/token
+GET http://127.0.0.1:5000/profile
 Content-Type: application/json
-
-{
-    "email":"test",
-    "password":"test"
-}
