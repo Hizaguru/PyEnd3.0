@@ -27,5 +27,11 @@ def my_profile():
         "name": "Nagato",
         "about": "Hello! I am me"
     }
-
     return response_body
+
+
+@auth.route('/signout', methods=['POST'])
+def signout_user():
+    response = jsonify({"msg": "You've been signed out successfully"})
+    unset_jwt_cookies(response)
+    return response, 200
