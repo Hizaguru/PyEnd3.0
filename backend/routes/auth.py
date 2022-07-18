@@ -1,4 +1,7 @@
+from datetime import datetime, timedelta
+import json
 from os import access
+from time import timezone
 from flask import Blueprint, request
 from flask_jwt_extended import create_access_token
 from ..extensions import jwt
@@ -19,6 +22,23 @@ def create_token():
     access_token = create_access_token(identity=email)
     response = {"access_token": access_token}
     return response
+
+
+@auth.after_request
+def refresh_expiring_jwts(response):
+    try:
+        expiring_time = get_jwt()["exp"]
+        current_time = datetime.now(timezone.utc)
+        target_time = datetime.timestamp(current_time + timedelta(minutes=30))
+        if target_time > expiring_time:
+            access_token = create_access_token(identity=get_jwt_identity())
+            data = response.get_json()
+            if type(data) is dict:
+                data["access_token"] = access_token
+                response.data = json.dumps(data)
+        return response, 200
+    except (RuntimeError, KeyError):
+        return response, 200
 
 
 @auth.route('/profile')
