@@ -40,7 +40,7 @@ export default function Login({ setToken }) {
 
 
     return (
-        <div>
+        <div >
             <h1>Login</h1>
             <form className="login">
                 <input onChange={handleChange}
