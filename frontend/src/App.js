@@ -1,32 +1,18 @@
 import React, { useState } from 'react';
-import axios from 'axios'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Login from './components/Login/Login'
 import './App.css';
 
 function App() {
   const [profileData, setProfileData] = useState([])
 
 
-  // axios({
-  //   method: 'GET',
-  //   url: "/profile",
-  // }).then((response) => {
-  //   console.log(response)
-  //   const res = response.data;
-  //   setProfileData(({
-  //     name: res.name,
-  //     about: res.about
-  //   }))
-  //   console.log(profileData)
-  // }).catch((error) => {
-  //   console.log(error.response)
-  // })
-
   return (
-    <div className="App">
-      <p>
-        Hi
-      </p>
-    </div>
+    <BrowserRouter>
+      <div className='App'>
+        <p>asd</p>
+      </div>
+    </BrowserRouter>
   );
 }
 
