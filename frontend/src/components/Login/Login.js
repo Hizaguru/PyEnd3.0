@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import axios from 'axios'
-
+import './Login.css'
 export default function Login({ setToken }) {
 
     const [loginForm, setLoginForm] = useState({
@@ -40,22 +40,25 @@ export default function Login({ setToken }) {
 
 
     return (
-        <div >
+        <div>
             <h1>Login</h1>
             <form className="login">
-                <input onChange={handleChange}
-                    type="email"
-                    text={loginForm.email}
-                    name="email"
-                    placeholder="Email"
-                    value={loginForm.email} />
-                <input onChange={handleChange}
-                    type="password"
-                    text={loginForm.password}
-                    name="password"
-                    placeholder="Password"
-                    value={loginForm.password} />
-
+                <div>
+                    <input onChange={handleChange}
+                        type="email"
+                        text={loginForm.email}
+                        name="email"
+                        placeholder="Email"
+                        value={loginForm.email} />
+                </div>
+                <div>
+                    <input onChange={handleChange}
+                        type="password"
+                        text={loginForm.password}
+                        name="password"
+                        placeholder="Password"
+                        value={loginForm.password} />
+                </div>
                 <button onClick={signIn}>Submit</button>
             </form>
         </div>

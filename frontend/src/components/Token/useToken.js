@@ -3,7 +3,8 @@ import { useState } from 'react'
 
 export default function useToken() {
     function getToken() {
-        return localStorage.getItem('token');
+        const userToken = localStorage.getItem('token');
+        return userToken && userToken
     }
     const [token, setToken] = useState(getToken);
 
