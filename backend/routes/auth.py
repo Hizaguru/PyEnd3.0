@@ -20,7 +20,7 @@ def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     if email != "test" or password != "test":
-        return {"msg": "Wrong email or password"}, 401
+        return {"msg": "Wrong email or password"}
 
     access_token = create_access_token(identity=email)
     response = {"access_token": access_token}
@@ -39,9 +39,9 @@ def refresh_expiring_jwts(response):
             if type(data) is dict:
                 data["access_token"] = access_token
                 response.data = json.dumps(data)
-        return response, 200
+        return response
     except (RuntimeError, KeyError):
-        return response, 200
+        return response
 
 
 @auth.route('/signout', methods=['POST'])
@@ -64,4 +64,4 @@ def my_profile():
 def signout_user():
     response = jsonify({"msg": "You've been signed out successfully"})
     unset_jwt_cookies(response)
-    return response, 200
+    return response
