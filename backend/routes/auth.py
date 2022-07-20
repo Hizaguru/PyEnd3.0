@@ -1,13 +1,16 @@
-from datetime import datetime, timedelta
-import json
-from os import access
-from time import timezone
-from flask import Blueprint, request
-from flask_jwt_extended import create_access_token
-from ..extensions import jwt
 from flask import Flask, request, jsonify
+from ..extensions import jwt
+from flask_jwt_extended import create_access_token
+from flask import Blueprint, request
+from urllib import response
+from crypt import methods
+from time import timezone
+from os import access
+import json
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
-    unset_jwt_cookies, jwt_required, JWTManager
+    unset_jwt_cookies
+from datetime import datetime, timedelta
+
 
 auth = Blueprint('auth', __name__)
 
@@ -17,7 +20,7 @@ def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     if email != "test" or password != "test":
-        return {"msg": "wrong email or password"}, 401
+        return {"msg": "Wrong email or password"}, 401
 
     access_token = create_access_token(identity=email)
     response = {"access_token": access_token}
@@ -39,6 +42,13 @@ def refresh_expiring_jwts(response):
         return response, 200
     except (RuntimeError, KeyError):
         return response, 200
+
+
+@auth.route('/signout', methods=['POST'])
+def signout():
+    response = jsonify({"msg": "You've been signed out successfully."})
+    unset_jwt_cookies(response)
+    return response
 
 
 @auth.route('/profile')

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # POST http://127.0.0.1:5000/token
 # Content-Type: application/json
 
@@ -7,3 +8,12 @@
 # }
 
 POST http://127.0.0.1:5000/signout
+=======
+POST http://localhost:5000/token HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"test",
+    "password":"test"
+}
+>>>>>>> main
